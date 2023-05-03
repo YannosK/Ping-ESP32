@@ -1,10 +1,27 @@
 #include <Arduino.h>
 #include <WiFi.h>
 
+const char* ssid = "your-ssid";
+const char* password = "your-password";
+
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi");
+  
+  while (WiFi.status() != WL_CONNECTED){
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.print("\nConected\n");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+  if (WiFi.status() == WL_CONNECTED){
+    Serial.println("Ping me!");
+    delay(5000);
+  }
+  else{
+    Serial.println("Connection lost");
+  }
