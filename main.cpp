@@ -14,7 +14,8 @@ void setup() {
     Serial.print(".");
     delay(500);
   }
-  Serial.print("\nConected\n");
+  Serial.print("\nConected to WiFi network with local IP address:");
+  Serial.println(WiFi.localIP());
 }
 
 void loop() {
@@ -25,3 +26,4 @@ void loop() {
   else{
     Serial.println("Connection lost");
   }
+}
