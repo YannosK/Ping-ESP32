@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <WiFi.h>
 
-const char* ssid = "ARTINA WIFI"; //my ssid
-const char* password = ""; //password
+const char* ssid = "TP-LINK_8EDC"; //my ssid
+const char* password = "87312324"; //password
 
 
 void setup() {
