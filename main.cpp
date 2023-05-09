@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
+#define ledPIN 5
 
 const char* ssid = "BS_AP_Z_5_3"; //my ssid
 const char* password = "kalosavvatokiriako2023"; //password
@@ -7,6 +8,7 @@ const char* password = "kalosavvatokiriako2023"; //password
 
 void setup() {
   Serial.begin(115200);
+  pinMode(ledPIN,OUTPUT);
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi");
   
@@ -18,10 +20,14 @@ void setup() {
   Serial.println(WiFi.localIP());
 }
 
-void loop() {
+void loop() {  
   if (WiFi.status() == WL_CONNECTED){
-    Serial.println("Ping me!");
-    delay(5000);
+    Serial.println("LED ON");
+    digitalWrite(ledPIN,HIGH);
+    delay(1000);
+    Serial.println("LED OFF");
+    digitalWrite(ledPIN,LOW);
+    delay(1000);
   }
   else{
     Serial.println("Connection lost");
