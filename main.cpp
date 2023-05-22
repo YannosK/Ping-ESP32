@@ -2,8 +2,8 @@
 #include <WiFi.h>
 #define ledPIN 5
 
-const char* ssid = "BS_AP_Z_5_3"; //my ssid
-const char* password = "kalosavvatokiriako2023"; //password
+const char* ssid = "MyrDyn"; //my ssid
+const char* password = "M90b53M98pj62@"; //password
 
 
 void setup() {
