@@ -1,35 +1,34 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#define ledPIN 5
+#define WIFI_NETWORK "MyrDyn" //my ssid
+#define WIFI_PASSWORD "M90b53M98pj62@" //password
 
-const char* ssid = "MyrDyn"; //my ssid
-const char* password = "M90b53M98pj62@"; //password
-
+void ConnectToWiFi();
 
 void setup() {
   Serial.begin(115200);
-  pinMode(ledPIN,OUTPUT);
-  WiFi.begin(ssid, password);
+  ConnectToWiFi();
+}
+
+void loop() {
+}
+
+void ConnectToWiFi() {
   Serial.print("Connecting to WiFi");
+
+  WiFi.mode(WIFI_STA); //it gives an IP address to the board from an existing network
+  WiFi.begin(WIFI_NETWORK, WIFI_PASSWORD);
   
   while (WiFi.status() != WL_CONNECTED){
     Serial.print(".");
     delay(500);
   }
-  Serial.print("\nConected to WiFi network with local IP address:");
-  Serial.println(WiFi.localIP());
-}
 
-void loop() {  
-  if (WiFi.status() == WL_CONNECTED){
-    Serial.println("LED ON");
-    digitalWrite(ledPIN,HIGH);
-    delay(1000);
-    Serial.println("LED OFF");
-    digitalWrite(ledPIN,LOW);
-    delay(1000);
+  if (WiFi.status() != WL_CONNECTED){
+    Serial.println("Connection lost");
   }
   else{
-    Serial.println("Connection lost");
+    Serial.print("\nConected to WiFi network with local IP address:");
+    Serial.println(WiFi.localIP()); 
   }
 }
