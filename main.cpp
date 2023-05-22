@@ -3,6 +3,8 @@
 #define WIFI_NETWORK "MyrDyn" //my ssid
 #define WIFI_PASSWORD "M90b53M98pj62@" //password
 
+int status = WL_IDLE_STATUS;
+
 void ConnectToWiFi();
 
 void setup() {
@@ -11,6 +13,9 @@ void setup() {
 }
 
 void loop() {
+  Serial.println(WiFi.macAddress());
+  Serial.println(WiFi.localIP());
+  delay(1000);
 }
 
 void ConnectToWiFi() {
