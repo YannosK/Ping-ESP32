@@ -13,8 +13,11 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(WiFi.macAddress());
+  Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+  Serial.print("MAC address: ");
+  Serial.println(WiFi.macAddress());
+  Serial.println("");
   delay(1000);
 }
 
