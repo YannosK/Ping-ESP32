@@ -3,6 +3,8 @@
 #define WIFI_NETWORK "ARTINA WIFI" //my ssid
 #define WIFI_PASSWORD "" //password
 
+WiFiServer server(80); //Creates a server that listens for incoming connections on the specified port
+
 int status = WL_IDLE_STATUS;
 
 void ConnectToWiFi();
@@ -21,7 +23,7 @@ void loop() {
 void ConnectToWiFi() {
   Serial.print("Connecting to WiFi");
 
-  WiFi.mode(WIFI_STA); //it gives an IP address to the board from an existing network
+  WiFi.mode(WIFI_STA); //STATION MODE: it gives an IP address to the board from an existing network
   WiFi.begin(WIFI_NETWORK, WIFI_PASSWORD);
   
   while (WiFi.status() != WL_CONNECTED){
