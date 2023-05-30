@@ -19,6 +19,8 @@ void loop() {
   Serial.println(WiFi.localIP());
   Serial.print("MAC address: ");
   Serial.println(WiFi.macAddress());
+  Serial.print("Server port: 80\n\n");
+  server.println("ESP32 Around!!!");
   delay(1000);
 }
 
