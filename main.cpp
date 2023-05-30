@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#define WIFI_NETWORK "MyrDyn" //my ssid
-#define WIFI_PASSWORD "M90b53M98pj62@" //password
+#define WIFI_NETWORK "ARTINA WIFI" //my ssid
+#define WIFI_PASSWORD "" //password
 
 int status = WL_IDLE_STATUS;
 
