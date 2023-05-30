@@ -15,8 +15,10 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(WiFi.macAddress());
+  Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+  Serial.print("MAC address: ");
+  Serial.println(WiFi.macAddress());
   delay(1000);
 }
 
@@ -35,7 +37,8 @@ void ConnectToWiFi() {
     Serial.println("Connection lost");
   }
   else{
+    server.begin(); //Tells the server to begin listening for incoming connections
     Serial.print("\nConected to WiFi network with local IP address:");
-    Serial.println(WiFi.localIP()); 
+    Serial.println(WiFi.localIP());
   }
 }
