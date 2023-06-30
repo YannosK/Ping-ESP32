@@ -16,6 +16,7 @@ ARTINA
 */
 
 void ConnectToWiFi(const char* WIFI_NETWORK, const char* WIFI_PASSWORD);
+void WifiCredentialsViaSerial(char WiFi_network[], char WiFi_password[]);
 
 int status = WL_IDLE_STATUS;
 
@@ -26,29 +27,7 @@ void setup() {
   char WiFi_ssid[32];
   char WiFi_pswd[32];
 
-  Serial.print("\nAdd WiFi SSID: ");
-  while(!Serial.available()){
-    delay(1);
-  }
-  Serial.readBytes(WiFi_ssid, sizeof(WiFi_ssid));
-  WiFi_ssid[sizeof(WiFi_ssid) - 1] = '\0';
-  String ssidString = WiFi_ssid;
-  ssidString.trim();  // Remove leading/trailing whitespaces
-  ssidString.toCharArray(WiFi_ssid, sizeof(WiFi_ssid));
-  Serial.print("\nWiFi_ssid: ");
-  Serial.println(WiFi_ssid);
-
-  Serial.print("\nAdd WiFi password: ");
-  while(!Serial.available()){
-    delay(1);
-  }
-  Serial.readBytes(WiFi_pswd, sizeof(WiFi_pswd));
-  WiFi_pswd[sizeof(WiFi_pswd) - 1] = '\0';
-  String pswdString = WiFi_pswd;
-  pswdString.trim();  // Remove leading/trailing whitespaces
-  pswdString.toCharArray(WiFi_pswd, sizeof(WiFi_pswd));
-  Serial.print("\nWiFi_pswd: ");
-  Serial.println(WiFi_pswd);
+  WifiCredentialsViaSerial(WiFi_ssid, WiFi_pswd);
 
   ConnectToWiFi(WiFi_ssid, WiFi_pswd);
 }
@@ -79,4 +58,30 @@ void ConnectToWiFi(const char* WIFI_NETWORK, const char* WIFI_PASSWORD) {
     Serial.print("\nConected to WiFi network with local IP address:");
     Serial.println(WiFi.localIP()); 
   }
+}
+
+void WifiCredentialsViaSerial(char WiFi_network[], char WiFi_password[]) {
+  Serial.print("\nAdd WiFi SSID: ");
+  while(!Serial.available()){
+    delay(1);
+  }
+  Serial.readBytes(WiFi_network, 32);
+  WiFi_network[31] = '\0';
+  String ssidString = WiFi_network;
+  ssidString.trim();  
+  ssidString.toCharArray(WiFi_network, 32);
+  Serial.print("\nWiFi_network: ");
+  Serial.println(WiFi_network);
+
+  Serial.print("\nAdd WiFi password: ");
+  while(!Serial.available()){
+    delay(1);
+  }
+  Serial.readBytes(WiFi_password, 32);
+  WiFi_password[31] = '\0';
+  String pswdString = WiFi_password;
+  pswdString.trim(); 
+  pswdString.toCharArray(WiFi_password, 32);
+  Serial.print("\nWiFi_password: ");
+  Serial.println(WiFi_password);
 }
