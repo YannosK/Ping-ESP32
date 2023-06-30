@@ -1,6 +1,20 @@
 #include <Arduino.h>
 #include <WiFi.h>
 
+/*
+BON STUDIO
+"BS_AP_Z_5_3"
+"kalosavvatokiriako2023"
+
+PEDRO
+"MyrDyn"
+"M90b53M98pj62@"
+
+ARTINA
+"ARTINA WIFI"
+""
+*/
+
 void ConnectToWiFi(const char* WIFI_NETWORK, const char* WIFI_PASSWORD);
 
 int status = WL_IDLE_STATUS;
