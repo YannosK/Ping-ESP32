@@ -1,30 +1,15 @@
 #include <Arduino.h>
 #include <WiFi.h>
 
-/*
-BON STUDIO
-"BS_AP_Z_5_3"
-"kalosavvatokiriako2023"
 
-"AP_Fiber_Z_5_3"
-"BonStud1o2022"
-
-PEDRO
-"MyrDyn"
-"M90b53M98pj62@"
-
-ARTINA
-"ARTINA WIFI"
-""
-*/
 
 void ConnectToWiFi(const char* WIFI_NETWORK, const char* WIFI_PASSWORD);
 void WifiCredentialsViaSerial(char WiFi_network[], char WiFi_password[]);
-void ConnectToServer(char server[]);
+void ConnectToServer(IPAddress server);
 
 int status = WL_IDLE_STATUS;
 
-char server[] = "www.google.com";
+IPAddress server(192, 168, 1, 44);
 
 // Initialize the Ethernet client library
 // with the IP address and port of the server
@@ -63,6 +48,8 @@ void loop() {
   Serial.println();
   Serial.println("disconnecting from server.");
   client.stop();
+
+  delay(1000);
 }
 
 
@@ -114,16 +101,27 @@ void WifiCredentialsViaSerial(char WiFi_network[], char WiFi_password[]) {
 }
 
 
-void ConnectToServer(char server[])
+void ConnectToServer(IPAddress server)
 {
   Serial.println("\nStarting connection to server...");
   // if you get a connection, report back via serial:
+  client.connect(server, 80);
+
+  //affirmation that we connected indeed
+  if (client.connected()) {
+    Serial.println("connected to server");
+  }
+
+  /*
   if (client.connect(server, 80)) {
     Serial.println("connected to server");
     // Make a HTTP request:
+    /*
     client.println("GET /search?q=arduino HTTP/1.1");
     client.println("Host: www.google.com");
     client.println("Connection: close");
     client.println();
-  }
+    
+  }*/
+  
 }
