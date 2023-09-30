@@ -4,7 +4,7 @@
 
 
 void ConnectToWiFi(const char* WIFI_NETWORK, const char* WIFI_PASSWORD);
-void WifiCredentialsViaSerial(char WiFi_network[], char WiFi_password[]);
+//void WifiCredentialsViaSerial(char WiFi_network[], char WiFi_password[]);
 void ConnectToServer(IPAddress server);
 
 int status = WL_IDLE_STATUS;
@@ -19,10 +19,10 @@ WiFiClient client;
 void setup() {
   Serial.begin(115200);
 
-  char WiFi_ssid[32];
-  char WiFi_pswd[32];
+  char WiFi_ssid[32] = "HOME_EXT";
+  char WiFi_pswd[32] = "123456789";
 
-  WifiCredentialsViaSerial(WiFi_ssid, WiFi_pswd);
+  //WifiCredentialsViaSerial(WiFi_ssid, WiFi_pswd);
 
   ConnectToWiFi(WiFi_ssid, WiFi_pswd);
 
@@ -39,15 +39,27 @@ void loop() {
 
   while(client.connected()){
     // if there are incoming bytes available from the server, read them and print them:
-    while (client.available()) {
+    while(client.available()) {
       char c = client.read();
       Serial.write(c);
-    }    
+    }
+
+    while(Serial.available())
+    {
+      String msg_to_client = Serial.readString();
+      client.print(msg_to_client);
+    }   
+
+    //Serial.println();
+
+    //delay(1000);
+
+    //client.stop();
   }
 
   Serial.println();
   Serial.println("disconnecting from server.");
-  client.stop();
+  //client.stop();
 
   while(true)
   {}
@@ -74,7 +86,7 @@ void ConnectToWiFi(const char* WIFI_NETWORK, const char* WIFI_PASSWORD) {
   }
 }
 
-
+/*
 void WifiCredentialsViaSerial(char WiFi_network[], char WiFi_password[]) {
   Serial.print("\nAdd WiFi SSID: ");
   while(!Serial.available()){
@@ -100,7 +112,7 @@ void WifiCredentialsViaSerial(char WiFi_network[], char WiFi_password[]) {
   Serial.print("\nWiFi_password: ");
   Serial.println(WiFi_password);
 }
-
+*/
 
 void ConnectToServer(IPAddress server)
 {
@@ -111,18 +123,5 @@ void ConnectToServer(IPAddress server)
   //affirmation that we connected indeed
   if (client.connected()) {
     Serial.println("connected to server");
-  }
-
-  /*
-  if (client.connect(server, 80)) {
-    Serial.println("connected to server");
-    // Make a HTTP request:
-    /*
-    client.println("GET /search?q=arduino HTTP/1.1");
-    client.println("Host: www.google.com");
-    client.println("Connection: close");
-    client.println();
-    
-  }*/
-  
+  }  
 }
