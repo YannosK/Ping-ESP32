@@ -49,7 +49,8 @@ void loop() {
   Serial.println("disconnecting from server.");
   client.stop();
 
-  delay(1000);
+  while(true)
+  {}
 }
 
 
